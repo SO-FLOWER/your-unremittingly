@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>es6-Class</title>
+  </head>
+  <body>
+    <script>
+      //class是一种特殊的函数，不存在函数提升，普通的函数和变量都存在提升。
+      //class只能通过new关键字进行调用，生成new的实例。
+      class Parent {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        sayName() {
+          console.log(this.name);
+        }
+        static sayBye() {
+          console.log(
+            "只能通过Parent.sayBye进行调用---也就是只能通过class内部进行调用"
+          );
+        }
+      }
+      //一般的方法可以通过实例对象进行调用
+      const child = new Parent("Json", 24);
+      child.sayName();
+
+      class Child extends Parent {
+        constructor(name, age, gender) {
+          super(name, age);
+          this.gender = gender;
+        }
+        sayGender() {
+          console.log(this.gender);
+        }
+      }
+      const Person = new Child("Jsons", 20, "boy");
+      console.log(Person);
+    </script>
+  </body>
+</html>

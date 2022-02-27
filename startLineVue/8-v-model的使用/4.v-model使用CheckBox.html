@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-model使用checkbox</title>
+  </head>
+  <body>
+    <div id="app">
+      <label for="agree">
+        <input type="checkbox" id="agree" v-model="isShow" />同意协议
+      </label>
+      <button :disabled="!isShow">next</button>
+      <h4>isShow的状态{{isShow}}</h4>
+      <br />
+
+      <h4>多选框的选择</h4>
+      <input type="checkbox" value="篮球" v-model="list" />篮球
+      <input type="checkbox" value="排球" v-model="list" />排球
+      <input type="checkbox" value="桌球" v-model="list" />桌球
+      <input type="checkbox" value="足球" v-model="list" />足球
+      <h4>展示data里面的list: {{list}}</h4>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          isShow: false, //单选框时用布尔值
+          list: [], //多选框时用数组进行存值
+        },
+      });
+    </script>
+  </body>
+</html>

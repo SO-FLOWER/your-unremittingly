@@ -1,0 +1,30 @@
+node笔记
+1、node.js单线程配合事件驱动架构及libuv实现了异步IO.
+2、node.js是单线程的含义是v8主线程是单线程的.(node单线程不太好处理cpu密集型的任务,比如一些计算型的任务).
+3、文件node_api模拟了一个服务器接口传递数据的案例.(经典)
+
+4、buffer一块内存空间-有几个特性
+  4-1 无需require的一个全局变量  
+  4-2 实现node平台下的二进制数据操作 
+  4-3 不占据v8堆内存大小的内存空间
+  4-5 内存的使用由node来控制，由v8的GC回收   
+  4-6 一般配合Stream流使用，充当数据缓冲区
+5、创建buffer(常用两种创建方式)
+  5-1 alloc:创建指定字节大小的buffer (-------在utf-8模式下，数字和字母一般占一个字节，中文汉字一般一个文字占三个字节)
+  5-2 from: 接收数据，创建buffer
+6、buffer的实例方法
+  6-1 fill-使用数据填充buffer; (创建内存的大小过大时，自己写入的数据就会一直填充，直到内存占满)
+  6-2 write-向buffer中写入数据;(写入的数据为多少就是多少，不会自行填充)
+  6-3 toString-从buffer中提取数据
+  6-4 slice-截取buffer
+  6-5 indexOf-在buffer中查找数据
+7、buffer静态方法
+  7-1 concat-将多个buffer拼接成一个新的buffer(通过数组的形式进行拼接) let b = Buffer.concat([b1,b2]);
+  7-2 isBuffer判断当前数据是否为buffer
+
+8、fs模块，异步文件常用操作api
+  8-1 readFile-从指定问价中读取数据
+  8-2 writeFile-向指定文件中写入数据
+  8-3 appendFile-追加的方式向指定文件中写入数据
+  8-4 copyFile- 将某个文件中的数据拷贝至另一个文件
+  8-5 watchFile-对指定文件进行监控

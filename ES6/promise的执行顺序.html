@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise顺序</title>
+  </head>
+  <body>
+    <script>
+      //promise本身是同步的，.then和.catch方法是异步的
+      console.log(1);
+      let a = new Promise((res, rej) => {
+        res();
+        console.log(2);
+      });
+      a.then(() => {
+        console.log(6);
+      });
+      console.log(3);
+      let b = new Promise((res, rej) => {
+        res();
+        console.log(4);
+      });
+      b.then(() => {
+        console.log(7);
+      });
+      console.log(5);
+    </script>
+  </body>
+</html>

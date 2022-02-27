@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise</title>
+  </head>
+  <body>
+    <script>
+      const createPro = new Promise((reslove, reject) => {
+        setTimeout(() => {
+          reject("promise is not success");
+        }, 5000);
+      });
+      //通过这里的链式调用才能正常返回一个promise的对象,输出成功的结果
+      createPro
+        .then((res) => console.log(res))
+        .then(Error((err) => console.log(err)));
+    </script>
+  </body>
+</html>

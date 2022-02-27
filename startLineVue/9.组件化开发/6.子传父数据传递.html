@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>子传父数据</title>
+  </head>
+  <body>
+    <div id="app">
+      <Childemit @childend="receivedData" />
+    </div>
+    <template id="child">
+      <div>
+        <button v-for="item in movice" @click="btnClick(item)">
+          {{item.name}}
+        </button>
+      </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+      const Childemit = {
+        template: "#child",
+        data() {
+          return {
+            movice: [
+              { id: 1, name: "haizeiwang" },
+              { id: 2, name: "huoyingrenzhe" },
+              { id: 3, name: "kenan" },
+              { id: 4, name: "jingjidejuren" },
+            ],
+          };
+        },
+        methods: {
+          btnClick(item) {
+            //子组件通过emit进行派发事件到父组件中
+            this.$emit("childend", item);
+          },
+        },
+      };
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "Jsons",
+        },
+        components: { Childemit },
+        methods: {
+          receivedData(item) {
+            console.log(item);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

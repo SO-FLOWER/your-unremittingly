@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue-component语法糖</title>
+  </head>
+  <body>
+    <div id="app">
+      <mycpn></mycpn>
+      <mycpn></mycpn>
+      <mycpn></mycpn>
+    </div>
+    <template id="tempOne">
+      <div>
+        <div>组件简便 写法</div>
+      </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+      Vue.component("mycpn", {
+        template: "#tempOne",
+      });
+      const app = new Vue({
+        el: "#app",
+      });
+    </script>
+  </body>
+</html>

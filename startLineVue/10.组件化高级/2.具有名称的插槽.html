@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>插槽的具体替换</title>
+  </head>
+  <body>
+    <div id="app">
+      <Chlid>
+        <!-- 根据具体的插槽属性名称进行替换想要的dom节点 -->
+        <div slot="center">中间被替换</div>
+      </Chlid>
+    </div>
+    <template id="cpm">
+      <div>
+        <!-- 默认返回三个插槽 -->
+        <slot name="left"><span>左边</span></slot>
+        <slot name="center"><span>中间</span></slot>
+        <slot name="right"><span>右边</span></slot>
+      </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "父组件",
+        },
+        components: {
+          Chlid: {
+            template: "#cpm",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

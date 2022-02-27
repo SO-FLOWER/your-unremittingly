@@ -1,0 +1,209 @@
+1、webpack打包需要依赖入口文件，相应的引用模块导入才能被webpack进行打包，不然其他没有引入的模块则不
+被webpack进行打包。
+2、更改默认的webpack文件名称，默认为webpack.config.js更改其他名称，需要在package.json里面进行配置----
+"build": "webpack --config 文件名称.js"。
+3、postcss.config.js 文件名必须以其为准，里面可以安装一些第三方库的依赖。
+4、autoprefixer 这个插件是对不同浏览器css样式进行前缀样式的添加。
+5、postcss-preset-env 是一个css样式的集合，进行一些十六进制的颜色转换为rgba的配置，也包含了autoprefixer
+的功能。*****
+6、css-loader进行将语言设置能让webpack进行识别，而style-loader才是正真正将样式渲染在浏览器上的。****
+    {
+        test: /\.css$/,
+        use: [
+            'style-loader',
+            {
+                loader: 'css-loader',
+                options: {
+                    importLoaders: 1,
+                    esModule: false
+                }
+            },
+            'postcss-loader'
+        ]
+    },
+7、less-loader是将less语言中的一些变量转换为css，在进行一些转换。
+    {
+        test: /\.less$/,
+        use: [
+            'style-loader',
+            'css-loader',
+            'postcss-loader',
+            'less-loader']
+    },
+8、importLoaders参数设置为1时，代表后面的操作再执行一次，import-loader进行相关参数的配置，当css文件里面
+还有引入其他css文件的时候，需要给前一次操作进行打包时，可以用importLoaders进行返回上一次命令操作。***
+9、file-loader用于webpack处理照片的格式问题，一般会配置esModule:fales进行判断是否到处es6模块，将其转化
+为默认获取对于的值，不用在图片后缀进行.defaule配置。
+10、使用require导入图片，此时如果不配置esModule: false,则需要.default导出,也可以在配置当中设置esModule:
+false，采用import xxx from 图片资源，此时可以直接使用 xxxx。
+11、自定义图片文件的名称和文件夹---通过配置webpack进行相应的操作。
+    options: {
+                name: 'img/[name].[hash:6].[ext]',
+                // outputPath: 'img', 创建文件夹
+                esModule: false
+            }
+    占位符 [name]:文件名  [hash]:文件内容 [ext]:扩展名 [hash<length>]
+12、url-loader base64 uri 文件当中减少请求；
+        file-loader 将资源拷贝至指定目录，分开请求;
+        url-loader 内部其实也可以调用 file-loaderl;
+        limit 指定图片资源大小，进行限制   10 * 1024；
+ 13、asset打包包含了url-loader 与 file-loader,现在用webpack进行打包，默认配置一般是用asset进行参数的配置。
+    {
+        test: /\.(png|svg|gif|jpe?g)$/,
+        type: 'asset',
+        generator: {
+            filename: "img/[name].[hash:4][ext]"
+        },
+        parser: {
+            dataUrlCondition: {
+                maxSize: 30 * 1024
+            }
+        }
+    }
+14、打包文字图标，直接在打包出的文件下进行放置相应的文件。
+    {
+        test: /\.(ttf|woff?2)$/,
+        type: 'asset/resource',
+        generator: {
+            filename: 'font/[name].[hash:3][ext]'
+        }
+    }
+15、通过插件进行相应的webpack打包，每一个插件相当于一个构造函数，需要什么参数具体的可以去github上面进行相
+应的查询。
+16、webpack Plugins插件： 
+       new ClearWebpackPlugin()每次打包清除之前的插件。
+       new HtmlWebpackPlugin({
+                title: 'html-webpack-plugin',
+                template: './pubilc/index.html'
+       })
+       new DefinePlugin({ BASE-URL: '"./"' }) ---------文件的跟路径（一些标题logo）
+
+安装babel----
+安装 npm i @babel/core 和 npm i @babel/cli 可以直接在终端进行babel的打包----只是对源文件进行打包并没有功能上的改变(需要安装其他的功能插件)；
+通过安装 @babel/plugin-transform-arrow-functions 可以将es6转换为es5；
+通过安装 @babel/plugin-transform-block-scoping 可以将const let 转化为 var;
+大部分babel功能模块的一些集合--@babel/preset-env 进行打包;
+
+17、通过babel-loader进行打包----
+{
+    test: /\.js$/,
+    use: [
+    {
+          loader: 'babel-loader',
+           options: [
+                presets: [
+                      '@babel/preset-env',
+                      { targets: 'chrome 91' }
+                ]
+           ]
+     }
+    ]
+ }
+
+18、Polyfill用来为旧浏览器提供它没有原生支持的较新的功能。(兼容promise等浏览器不适配的JS语法)；
+根目录babel.config.js
+module.exports = {
+        presets: [
+            '@babel/preset-env', //有一些语法是不能直接进行转换
+            {
+                //false: 不对当前的js处理做 polyfill的填充
+                //usage: 依据用户源代码当中所使用到的新语法进行填充
+                //entry: 依据我们当前使用的浏览器，来决定我们需要填充什么
+                useBuiltIns:'false',
+                corejs: 3    //版本使用为3                        
+            }
+        ]
+}
+在入口文件引入相关安装的依赖： import "core-js/stable";      import "regenerator-runtime/runtime";
+
+19、copyWebpackPlugin拷贝相应的静态资源到对应的打包之后的dist目录--
+      像一些图标图片，需要打包到相应的dist目录中，就需要在原public中copy相应的资源---这时可用copywebpackplugin插件、
+        new CopyWebpackPlugin({
+        patterns: [     
+           {
+               from: 'public',
+               globOptions: {
+                    ignore:['**/index.html']
+               }
+           }
+        ]
+})
+
+20、webpack-dev-server用于自动更新重新编写的代码，不用手动进行刷新--，不需要每次进行打包，直接在已有的代码区域进行保存即可。
+        进行第三方资源的下载webpack-dev-serve
+        在根目录下的package.json进行引用--
+        "scripts": {
+             "server": "webpack serve --config  webpack.config.js"  
+         }
+
+21、HMR热更新，在html中只更新修改部分的组件，而不是整体页面的更新------
+       在webpack中，基于webpack-dev-serve自动打包更新最新代码模式中，进行HMR的配置。
+       首先需要忽略.browserslistrc文件以避免扰乱webpack的配置文件----需要在webpack.config.js文件中进行配置，在module.exports={}
+根目录文件加入target:'web'这个字段。忽略browserlistrc，顺便加入devServer: { hot:  true }开启热更新。
+
+22、webpack用history路由的时候刷新当前页面时，资源会没有找到报404--可以通过进行根目录的配置就可以默认找到index.html文件路径.
+在webpack.config.js路径下进行相应的配置。
+       devServer:{
+             hot: ture,  hotOnly: true,  port: 4000，open: false,  compress: true, historyApiFallback: true    
+       }
+
+23、webpack设置proxy代理，进行解决跨域问题--在webpack.config.js文件下，进行相应的配置
+       devServer:{
+          proxy:{
+               //  /api/users    一般通过这个参数去请求接口，没有api这个字段
+               //  https://localhost:4000/api/users
+               //  https://api.github.com/users   ------------默认这个就可以访问到数据
+               //  https://api.github.com/info/users
+               //  /api/users ---- 返回
+               '/api' : {
+                   target: 'https://api.github.com',
+                   pathRewrite: {"^/api" : ""},           /根据后端返回的接口进行判断重写
+                   //   pathRewrite: {"^/api" : "info"},     /后端的接口参数有info字段就重写为info不能为空
+                   changeOrigin: true
+               }
+          }
+      }
+
+24、模块解析的一些规则
+      resolve: {
+            extensions:[".js", ".json", ".ts", ".jsx", ".vue"],  模块引入自动补全
+            alias:{
+                   "@": path.resolve(__dirname, 'src')
+            }
+      }
+      
+25、source-map 映射，在浏览器控制台测试的时候可以定位到源码的信息--
+     mode: 'development',
+     devtool: 'source-map'
+
+26、通过ts-loader进行对ts文件进行打包编译的过程,下载ts-loader对ts文件进行编译，只能转换成js语法，对promise这些语法
+的支持行不友好，需要通过babel-loader进行配置转换。
+    {
+        test: /\.ts$/,
+        use: ['ts-loader']
+    }
+
+27、通过babel-loader进行对ts文件的打包，可以Polyfill一些es6的语法，以及转义ts的语法。具体配置
+webpack.config.js 下
+    {
+        test：/\.ts$/,
+        use: ['babel-loader']
+    }
+    //通过ts-loader进行打包的好处：在打包过程中代码中有错会直接报错出来
+babel.config.js下
+    module.exports = {
+        presets: [
+            ['@babel/preset-env',{useBuiltIns: 'usage', corejs: 3}],
+            ['@babel/preset-typescript']
+        ]
+    }
+    //通过babel-loader进行打包的好处：会对promise一些语法进行polyfill填充，但是ts语法有错误的话，
+    在打包的过程中不会报错，会在生成的html文件控制台中输出错误。
+
+通过babel-loader进行对ts的打包,想进行校验的话可以在package.json中进行相应的配置。
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run check && webpack", //再用配置好的babel.loader进行打包
+    "serve": "webpack serve",
+    "check": "tsc --noEmit"   //先通过ts进行校验判断是否有错误生成
+}

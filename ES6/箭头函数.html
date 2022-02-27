@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>箭头函数</title>
+  </head>
+  <body>
+    <script>
+      //隐式返回,可以省略return关键字
+      let arr = [1, 2, 3, 4, 5];
+      const retArr = arr.map((num) => num * 2);
+      console.log("retArr" + retArr);
+
+      //不易使用箭头函数，通过new关键词进行创建对象的时候
+      //作为构造函数，一个方法需要绑定到对象
+      const Person = function (name, points) {
+        this.name = name;
+        this.points = points;
+      };
+      console.log(typeof Person);
+      //通过new关键字声明内部的具体步骤：1-生成一个新的对象 2-把构造函数里面的this值指向新生成的对象
+      //3-把这个对象绑定到它的原型 4-返回新生成的对象
+      const Jelly = new Person("jelly", 5);
+      console.log(Jelly);
+      console.log("Jelly" + Jelly.name + Jelly.points);
+      //在原型对象上添加一些属性方法
+      Person.prototype.upData = function () {
+        this.points++;
+        console.log(this.points);
+      };
+      Jelly.upData();
+    </script>
+  </body>
+</html>

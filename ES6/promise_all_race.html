@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All_Race</title>
+  </head>
+  <body>
+    <h5>
+      promise
+      all方法，传入多个promise必须都返回reslove的结果才能成功否则返回reject
+    </h5>
+    <h5>
+      promise
+      race方法，传入多个promise根据第一个返回的promise决定，成功则成功失败则失败
+    </h5>
+    <script>
+      const proOne = new Promise((reslove, reject) => {
+        setTimeout(() => {
+          // reslove(["apple", "banner", "orange"]);
+          reject(Error("no data"));
+        }, 2000);
+      });
+      const proTwo = new Promise((reslove, reject) => {
+        setTimeout(() => {
+          reslove({ name: "jsons", age: 24, hobby: "read book" });
+        }, 500);
+      });
+
+      // Promise.all([proOne, proTwo]).then((res) => {
+      //   const [proOne, proTwo] = res;
+      //   console.log(proOne);
+      //   console.log(proTwo);
+      // });
+
+      Promise.race([proOne, proTwo]).then((res) => {
+        //因为定时器的时间比较短，所以第一个返回的还是成功的
+        console.log(res);
+      });
+    </script>
+  </body>
+</html>

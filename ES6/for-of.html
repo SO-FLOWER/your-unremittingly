@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For-of</title>
+  </head>
+  <body>
+    <script>
+      const friut = ["oarange", "apple", "banner", "mangose"];
+      //使用foreach进行遍历循环，是不能终止return和break循环的
+      friut.forEach((item) => {
+        // if(item = 'oarange'){
+        //   break
+        // }                 //会报错，不能跳出循环
+        console.log(item);
+      });
+
+      //for-of 支持终止循环和跳过
+      for (const item of friut) {
+        if (item === "apple") {
+          // break;
+          continue;
+        }
+        console.log(item);
+      }
+    </script>
+  </body>
+</html>

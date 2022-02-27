@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>父子组件数据传递</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>
+        父子组件传递数据一般通过v-bind进行数据绑定-不然传递到的数据默认为你命名的变量
+      </h4>
+      <Child :messages="message" :list="list" />
+    </div>
+    <template id="child">
+      <div>
+        <div>{{message}}</div>
+        <div>从父组件传递过来的数据</div>
+        <div>{{messages}}</div>
+        <div>{{list}}</div>
+        <h4>
+          父组件传递给子组件的数据，可以再定义到data数据里面，不要直接修改props里面的数据
+        </h4>
+        <h4>{{changmessages}}</h4>
+        <input type="text" v-model="changmessages" />
+      </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+      //定义全局组件
+      // Vue.component("Child", {
+      //   template: "#child",
+      //   data() {
+      //     return {
+      //       message: "Jsons why",
+      //     };
+      //   },
+      // });
+
+      //通过对象的形式进行组件的创建
+      const Child = {
+        template: "#child",
+        // props: ["messages", "list"],
+        // props: {
+        //   messages: String,
+        //   list: Array,
+        // },
+        props: {
+          //组件传递数据没有传递时默认值，required判定是否需要进行传递
+          messages: {
+            type: String,
+            default: "默认值",
+            required: true,
+          },
+          list: {
+            type: Array,
+            default: [],
+          },
+        },
+        data() {
+          return {
+            message: "hello Jsons!",
+            changmessages: this.messages,
+          };
+        },
+      };
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "hello Jsons",
+          list: ["海贼王", "火影忍者", "柯南"],
+        },
+        components: {
+          Child,
+        },
+      });
+    </script>
+  </body>
+</html>

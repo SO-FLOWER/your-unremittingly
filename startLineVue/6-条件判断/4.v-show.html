@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-show的使用</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-show与v-if都是隐藏相应的dom节点的，v-show是通过display:none进行隐藏，v-if是将整个dom节点移除 -->
+      <div v-if="isShow">v-if</div>
+      <div v-show="isShow">v-show</div>
+      <button @click="changeShow">切换</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          isShow: true,
+        },
+        methods: {
+          changeShow() {
+            this.isShow = !this.isShow;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

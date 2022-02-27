@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-on修饰符</title>
+  </head>
+  <body>
+    <div id="app">
+      <div @click="handleChange">
+        内容区域
+        <!-- 点击按钮时，父盒子的点击事件也会被调用 -->
+        <!-- 通过修饰符@click.stop进行阻止冒泡 -->
+        <button @click.stop="btnHandle">按钮</button>
+      </div>
+      <br />
+
+      <form action="baidu">
+        <!-- 通过@click.prevent行为阻止默认行为的提交 -->
+        <input type="submit" value="提交" @click.prevent="submitUpData" />
+      </form>
+      <br />
+
+      <!-- 当点击enter回车才会执行输出相应的操作 -->
+      <input type="text" @keyup.enter="handleKeyup" />
+      <br />
+
+      <!-- @click.once只能点击一次 -->
+      <button @click.once="btnHandleOnce">按钮2</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+          handleChange() {
+            console.log("事件冒泡！");
+          },
+          btnHandle() {
+            console.log("内部按钮被调用！");
+          },
+          submitUpData() {
+            console.log("数据已经被提交了！！");
+          },
+          handleKeyup() {
+            console.log("keyup被点击调用");
+          },
+          btnHandleOnce() {
+            console.log("默认只能点击一次");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-model使用</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>v-model的更多用于表单的输入和提交，一个双向绑定</h4>
+      <input type="text" v-model="message" />
+      <h4>{{message}}</h4>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "v-model usefull",
+        },
+      });
+    </script>
+  </body>
+</html>

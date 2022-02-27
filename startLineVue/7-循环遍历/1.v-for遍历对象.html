@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-for</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>v-for遍历对象的时候具体的变量值顺序为: value,key,index</h4>
+      <ul>
+        <li v-for="(item,key,index) in Jsons">{{index}}.{{key}}: {{item}}</li>
+      </ul>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          Jsons: {
+            name: "jsons",
+            age: 24,
+            height: 1.88,
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

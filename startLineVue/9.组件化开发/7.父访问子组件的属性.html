@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>获取子组件的属性或者方法</title>
+  </head>
+  <body>
+    <div id="app">
+      <Cpn ref="cpnRef"></Cpn>
+      <button @click="btnClickChild">按钮</button>
+    </div>
+    <template id="cpn">
+      <div>
+        <h4>我是子组件</h4>
+        <h4>父调用子组件的属性和方法时一般通过this.$refs进行调用</h4>
+        <h4>子调用父组件的属性和方法时一般通过this.$parent进行调用</h4>
+      </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+          btnClickChild() {
+            this.$refs.cpnRef.btnClick();
+          },
+        },
+        components: {
+          Cpn: {
+            template: "#cpn",
+            methods: {
+              btnClick() {
+                console.log("parents 使用我的属性方法");
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-bind</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 拼接不同数据来源的字符串 -->
+      <h4>{{message}} {{messageStr}}</h4>
+      <!-- 在方法里面需要调用函数需要加括号，因为是调用方法 -->
+      <h4>{{getCompileName()}}</h4>
+      <!-- 写在计算属性当中的属性不需要加括号，因为是属性方法 -->
+      <h4>{{finalName}}</h4>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "hello",
+          messageStr: "Jsons",
+        },
+        // 计算属性--vue内部缓存只会调用一次，而方法会使用几次就调用几次
+        computed: {
+          finalName() {
+            return this.message + " " + this.messageStr;
+          },
+        },
+        methods: {
+          getCompileName() {
+            return this.message + " " + this.messageStr;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>虚拟dom真实dom</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>
+        当没有key时，vue会把dom节点渲染到虚拟dom上，切换时默认两个节点是一样的，导致input里面的内容没有
+        进行切换。所以需要加上对应的key进行识别。
+      </h4>
+      <span v-if="isShow">
+        <label for="usename">用户账号</label>
+        <input type="text" id="usename" placeholder="用户账号" key="1" />
+      </span>
+      <span v-else>
+        <label for="email">用户邮箱</label>
+        <input type="text" id="email" placeholder="用户邮箱" key="2" />
+      </span>
+      <button @click="exchangeTab">切换</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          isShow: true,
+        },
+        methods: {
+          exchangeTab() {
+            this.isShow = !this.isShow;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

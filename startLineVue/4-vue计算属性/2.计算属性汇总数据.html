@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-bind</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>总价格:{{totalPrice}}</h4>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          books: [
+            { id: 1, name: "linux", price: 45 },
+            { id: 2, name: "java", price: 60 },
+            { id: 3, name: "javascript", price: 145 },
+            { id: 4, name: "c++", price: 75 },
+          ],
+        },
+        // 计算属性
+        computed: {
+          totalPrice: function () {
+            // let res = 0;
+            // for (let index = 0; index < this.books.length; index++) {
+            //   res += this.books[index].price;
+            // }
+            // return res;
+            const total = this.books.reduce((prev, val) => {
+              return prev + val.price;
+            }, 0);
+            console.log(total);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

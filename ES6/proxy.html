@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy</title>
+  </head>
+  <body>
+    <script>
+      //proxy可以赋予对象一些默认的方法，定义我们自身的逻辑
+      const person = { name: "jsons", age: 2000 };
+      const proxyUse = new Proxy(person, {
+        get(target, key) {
+          return target[key].toUpperCase();
+        },
+        set(target, key, value) {
+          if (typeof value === "string") {
+            target[key] = value.trim();
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-model值绑定</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>值绑定就是从服务器获取数据然后选择渲染之后追加到新的数组里面</h4>
+      <label v-for="item in listHobby" :for="item">
+        <input
+          type="checkbox"
+          :value="item"
+          v-model="list"
+          :id="item"
+        />{{item}}
+      </label>
+
+      <h4>展示data里面的list: {{list}}</h4>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          list: [], //多选框时用数组进行存值
+          listHobby: ["篮球", "足球", "排球", "羽毛球", "乒乓球"],
+        },
+      });
+    </script>
+  </body>
+</html>

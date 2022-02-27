@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if/v-else的使用</title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="isShow">展示区域</div>
+      <div v-else>当isShow为FALSE时显示</div>
+      <button @click="changeShow">切换</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          isShow: false,
+        },
+        methods: {
+          changeShow() {
+            this.isShow = !this.isShow;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-model修饰符lazy|number|trim</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>
+        通过.lazy修饰时，双向绑定不是实时的，通过键盘和鼠标点击才能获取输入框的值
+      </h4>
+      <input type="text" v-model.lazy="message" />
+      <h4>data里面的数据{{message}}</h4>
+
+      <h4>
+        通过.number修饰时可转化数字类型，因为v-model修饰的时候默认渲染的是string类型，
+      </h4>
+      <input type="number" v-model.number="nums" />
+      <h4>{{typeof(nums)}}{{nums}}</h4>
+
+      <h4>通过.trim去除输入文本的空格</h4>
+      <input type="text" v-model.trim="str" />
+      <h4>{{str}}</h4>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "v-model usefull",
+          nums: 0,
+          str: "hello Jsons",
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>初始vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <h5>{{message}}</h5>
+      <ul>
+        <li v-for="item in movice">{{item}}</li>
+      </ul>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+      const createVue = new Vue({
+        el: "#app",
+        data: {
+          message: "hello vue",
+          movice: ["大话西游", "海贼王", "千与千寻"],
+        },
+      });
+    </script>
+  </body>
+</html>

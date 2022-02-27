@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>作用域插槽的作用</title>
+  </head>
+  <body>
+    <div id="app">
+      <Chlid></Chlid>
+      <h4>
+        父组件替换插槽标签，所需要的数据由子组件进行传递-通过slot-scope进行数据传递，获取子组件的数据
+      </h4>
+      <Chlid>
+        <div slot-scope="slot">
+          <span>{{slot.data.join('-')}}</span>
+        </div>
+      </Chlid>
+    </div>
+    <template id="cpm">
+      <div>
+        <slot :data="list">
+          <ul>
+            <li v-for="item in list">{{item}}</li>
+          </ul>
+        </slot>
+      </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "父组件",
+        },
+        components: {
+          Chlid: {
+            template: "#cpm",
+            data() {
+              return {
+                list: ["javascript", "c++", "c#", "java"],
+              };
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

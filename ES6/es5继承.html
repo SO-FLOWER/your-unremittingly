@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES5继承</title>
+  </head>
+  <body>
+    <script>
+      //借助原型链实现继承
+      function Parents() {
+        this.name = "parent";
+        this.play = [1, 2, 3];
+      }
+      function Child() {
+        this.type = "child";
+      }
+      Child.prototype = new Parents();
+      console.log(new Child().play);
+
+      //最优选的方式
+      function ParentX() {
+        this.name = "parentX";
+        this.play = [1, 2, 3, 4];
+      }
+      function ChildX() {
+        ParentX.call(this);
+        this.type = "childX";
+      }
+      ChildX.prototype = Object.create(ParentX.prototype);
+      ChildX.prototype.constructor = ChildX;
+      console.log(new ChildX());
+    </script>
+  </body>
+</html>

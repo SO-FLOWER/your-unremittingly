@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>promiseExample</title>
+  </head>
+  <body>
+    <script>
+      const repos = [
+        {
+          name: "grit",
+          owner: "mojombo",
+          desc: "Grit is no longer maintained",
+          id: 1,
+        },
+        {
+          name: "jsons",
+          owner: "vanping",
+          desc: "jsons coming back",
+          id: 2,
+        },
+        {
+          name: "minBoy",
+          owner: "boxGoy",
+          desc: "minBoy is ours firends",
+          id: 3,
+        },
+      ];
+      const owners = [
+        {
+          name: "mojombo",
+          location: "xian",
+          followes: "233",
+        },
+        {
+          name: "vanping",
+          location: "guangzhou",
+          followes: "333",
+        },
+        {
+          name: "boxGoy",
+          location: "beijing",
+          followes: "222",
+        },
+      ];
+
+      function getNameId(id) {
+        return new Promise((reslove, rejcet) => {
+          setTimeout(() => {
+            const findId = repos.find((item) => item.id === id);
+            if (findId) {
+              reslove(findId);
+            } else {
+              rejcet(Error("no found"));
+            }
+          }, 2000);
+        });
+      }
+
+      function getOwners(own) {
+        return new Promise((reslove, reject) => {
+          const owner = owners.find((item) => item.name === own.owner);
+          if (owner) {
+            own.owner === owner;
+            reslove(own);
+          } else {
+            reject(Error("no found owner"));
+          }
+        });
+      }
+
+      getNameId(2)
+        .then((res) => {
+          return getOwners(res);
+        })
+        .then((own) => console.log(own));
+    </script>
+  </body>
+</html>

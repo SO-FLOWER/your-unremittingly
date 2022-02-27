@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-bind</title>
+  </head>
+  <style>
+    .isAlive {
+      color: pink;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <!-- 数字加上字符串最终会转成字符 / showFontSize在vue中会将其视为变量，并不会看做字符串 -->
+      <h4
+        :style="{color:showColor, fontSize: `${showFontSize}px`, backgroundColor: showBackGroundColor}"
+      >
+        {{message}}
+      </h4>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "v-bind绑定style",
+          showColor: "pink",
+          showFontSize: 50,
+          showBackGroundColor: "yellow",
+        },
+      });
+    </script>
+  </body>
+</html>

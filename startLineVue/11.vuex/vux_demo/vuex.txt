@@ -1,0 +1,5 @@
+1.引入vuex，定义一个store进行全局的状态管理，通过Vue.Store进行绑定-在组件内部通过$store.state进行状态的访问。
+2.通过vuecomponents进行dispathch事件到actions当中，在actions中处理的是异步事件，而在Mutations当中一般处理的
+是同步事件。
+3.通过Mutations当中定义一些方法，在组件内部用this.$store.commit进行调用定义的方法。
+4.vue的计算属性，当保存在data里面的数据需要进行一系列的转换时，可以定义再从计算属性当中。

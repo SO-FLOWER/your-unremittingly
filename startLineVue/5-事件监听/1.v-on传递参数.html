@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-on</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 默认去掉小括号时，vue会默认将浏览器生产的event事件对象作为参数传入到方法 -->
+      <button @click="handleChange">按钮</button>
+      <!-- 通过$event可以通过获取除参数的浏览器event事件 -->
+      <button @click="handleChangeT(123,$event)">按钮2</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+          handleChange(e) {
+            console.log(e);
+          },
+          handleChangeT(num, e) {
+            console.log(num, e);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue-component</title>
+  </head>
+  <body>
+    <div id="app">
+      <mycpn></mycpn>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const cpn1 = Vue.extend({
+        template: `
+          <div>
+            <div>创建一个子组件</div>
+            <h2>红红火火恍恍惚惚</h2>  
+          </div>
+       `,
+      });
+
+      const cpn2 = Vue.extend({
+        template: `
+          <div>
+            <div>创建一个父组件</div>
+            <h2>红红火火恍恍惚惚</h2>
+            <cpnO></cpnO>
+          </div>
+       `,
+        components: {
+          cpnO: cpn1,
+        },
+      });
+
+      const app = new Vue({
+        el: "#app",
+        components: {
+          mycpn: cpn2,
+        },
+      });
+    </script>
+  </body>
+</html>
