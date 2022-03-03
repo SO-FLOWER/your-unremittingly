@@ -1,19 +1,22 @@
 <template>
   <div>
-    <VueWatch/>
+    <VueWatch />
+    <br />
+    <VueWatchDemo />
   </div>
 </template>
 
 <script>
-import VueWatch from './components/VueWatch.vue'
+import VueWatch from "./components/VueWatch.vue";
+import VueWatchDemo from "./components/VueWatchDemo.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    VueWatch
-  }
-}
+    VueWatch,
+    VueWatchDemo,
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>
