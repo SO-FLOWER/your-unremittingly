@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nextTick</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>更新数据后当你想立即使用js操作新的视图的时候就需要使用nextTick</h4>
+      <div id="btn" @click="handleBtn()" ref="btn">{{message}}</div>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "初始值",
+        },
+        components: {},
+        methods: {
+          handleBtn() {
+            this.message = "修改之后的值";
+            console.log(this.$refs.btn.innerText);
+
+            //使用nextTick方法之后--------当数据更新了，在dom中渲染后，自动执行该函数
+            this.$nextTick(function () {
+              console.log(this.$refs.btn.innerText);
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

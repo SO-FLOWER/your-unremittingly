@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue-set</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>当你添加新的属性并想更新到视图上时可以使用this.$set()</h4>
+      <div>{{name}} {{age}} {{sex}}</div>
+      <button @click="handleBing()">set进行vue实例的双向绑定</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      let data = {
+        name: "Jsons",
+        age: 24,
+        sex: "",
+      };
+      new Vue({
+        el: "#app",
+        data: data,
+        methods: {
+          handleBing() {
+            this.$set(this, "sex", "male");
+            // this.sex = "male";
+          },
+        },
+      });
+      //sex不是vue实例化的时候拥有的属性，我们新增这个属性，vue并没有对他的setter和getter方法进行监听，因此无法实现双向绑定。
+      // data.sex = "male";
+    </script>
+  </body>
+</html>
